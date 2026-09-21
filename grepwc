@@ -1,0 +1,30 @@
+/**
+ * grepwc is my version of the linux grep + wc command
+ * the way to execute:
+ * node myhead.js <FILENAME> <PATTERN>
+ * it will return the Lines with that pattern, along with the Line number and Word count of that line.
+ */
+
+
+const fs = require('fs');
+const path = require('path')
+
+let lineNum;
+if (process.argv.length < 4) {
+  console.log('Missing Argument');
+  console.log(`Usage: node ${path.basename(process.argv[1])} <FILENAME> <PATTERN>`);
+  return;
+
+}
+let filename = process.argv[2];
+let pattern = process.argv[3]
+
+let content = fs.readFileSync(filename, 'utf-8');
+
+
+let lines = content.split('\n')
+for (i = 0; i < lines.length; i++){
+  if (lines[i].includes(pattern)){
+    let words = lines[i].split(' ')
+      console.log(`LINE NUM : ${i+1}, WORD COUNT ${words.length} ` + lines[i])
+  }}
